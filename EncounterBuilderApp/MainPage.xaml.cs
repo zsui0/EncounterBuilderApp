@@ -8,22 +8,6 @@ namespace EncounterBuilderApp;
 
 public partial class MainPage : ContentPage
 {
-
-    public struct Monster
-    {
-        public string Name, Size, Type, ChallengeRating;
-        public string SpeedJson;
-
-        public Monster(string name, string size, string type, string challengerating, string speedjson)
-        {
-            Name = name;
-            Size = size;
-            Type = type;
-            ChallengeRating = challengerating;
-            SpeedJson = speedjson; // Walk, Swim, Burrow, Fly
-        }
-    }
-
     static List<Monster> monsters = new List<Monster>();
 
     public MainPage()
@@ -57,7 +41,7 @@ public partial class MainPage : ContentPage
                 var obj = JObject.Parse(json);
                 foreach (var monster in obj["results"])
                 {
-                    monsters.Append(new Monster(Convert.ToString(monster["name"]), Convert.ToString(monster["size"]), Convert.ToString(monster["type"]), Convert.ToString(monster["challenge_rating"]), Convert.ToString(monster["speed"])));
+                    monsters.Append(new Monster(monster["name"].ToString(), monster["size"].ToString(), monster["type"].ToString(), monster["challenge_rating"].ToString()));
                     // elvileg beolvassa (nem biztos), de nagyon lassu a convert miatt 
                     // a struktura helyett osztályt kellene használnom
                 }
